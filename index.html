@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Calculator with Vue.js</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-<style>
-    body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .calculator {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-}
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
 
-    .display {
-    background-color: #eee;
-    border-radius: 5px;
-    font-size: 32px;
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: right;
-    overflow: hidden;
-}
+        .display {
+            background-color: #eee;
+            border-radius: 5px;
+            font-size: 32px;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: right;
+            overflow: hidden;
+        }
 
-    .buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
 
-    button {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 24px;
-    padding: 15px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
+        button {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 24px;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
 
-    button:hover {
-    background-color: #e0e0e0;
-}
+        button:hover {
+            background-color: #e0e0e0;
+        }
 
-    button.operator {
-    background-color: #ff9500;
-    color: white;
-}
+        button.operator {
+            background-color: #ff9500;
+            color: white;
+        }
 
-    button.operator:hover {
-    background-color: #e68900;
-}
+        button.operator:hover {
+            background-color: #e68900;
+        }
 
-    button.equals {
-    background-color: #4caf50;
-    color: white;
-    grid-column: span 2;
-}
+        button.equals {
+            background-color: #4caf50;
+            color: white;
+            grid-column: span 2;
+        }
 
-    button.equals:hover {
-    background-color: #45a049;
-}
+        button.equals:hover {
+            background-color: #45a049;
+        }
 
-    button.clear {
-    background-color: #f44336;
-    color: white;
-    grid-column: span 2;
-}
+        button.clear {
+            background-color: #f44336;
+            color: white;
+            grid-column: span 2;
+        }
 
-    button.clear:hover {
-    background-color: #da190b;
-}
-</style>
+        button.clear:hover {
+            background-color: #da190b;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -91,90 +91,90 @@
         <div class="display">{{ display }}</div>
         <div class="buttons">
             <button @click="append('7')">7</button>
-        <button @click="append('8')">8</button>
-    <button @click="append('9')">9</button>
-<button class="operator" @click="setOperator('/')">/</button>
-<button @click="append('4')">4</button>
-<button @click="append('5')">5</button>
-<button @click="append('6')">6</button>
-<button class="operator" @click="setOperator('*')">*</button>
-<button @click="append('1')">1</button>
-<button @click="append('2')">2</button>
-<button @click="append('3')">3</button>
-<button class="operator" @click="setOperator('-')">-</button>
-<button @click="append('0')">0</button>
-<button @click="append('.')">.</button>
-<button class="equals" @click="calculate">=</button>
-<button class="operator" @click="setOperator('+')">+</button>
-<button class="clear" @click="clear">C</button>
-</div>
-</div>
+            <button @click="append('8')">8</button>
+            <button @click="append('9')">9</button>
+            <button class="operator" @click="setOperator('/')">/</button>
+            <button @click="append('4')">4</button>
+            <button @click="append('5')">5</button>
+            <button @click="append('6')">6</button>
+            <button class="operator" @click="setOperator('*')">*</button>
+            <button @click="append('1')">1</button>
+            <button @click="append('2')">2</button>
+            <button @click="append('3')">3</button>
+            <button class="operator" @click="setOperator('-')">-</button>
+            <button @click="append('0')">0</button>
+            <button @click="append('.')">.</button>
+            <button class="equals" @click="calculate">=</button>
+            <button class="operator" @click="setOperator('+')">+</button>
+            <button class="clear" @click="clear">C</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    const { createApp } = Vue;
+    const {createApp} = Vue;
 
     createApp({
-    data() {
-    return {
-    current: '0',
-    previous: null,
-    operator: null,
-    operatorClicked: false
-};
-},
-    computed: {
-    display() {
-    return this.current;
-}
-},
-    methods: {
-    clear() {
-    this.current = '0';
-    this.previous = null;
-    this.operator = null;
-    this.operatorClicked = false;
-},
-    append(number) {
-    if (this.operatorClicked) {
-    this.current = '';
-    this.operatorClicked = false;
-}
-    this.current = this.current === '0' ? number : this.current + number;
-},
-    setOperator(operator) {
-    if (this.previous !== null) {
-    this.calculate();
-}
-    this.previous = this.current;
-    this.operator = operator;
-    this.operatorClicked = true;
-},
-    calculate() {
-    if (this.previous === null || this.operator === null) return;
-    let result;
-    const prev = parseFloat(this.previous);
-    const curr = parseFloat(this.current);
-    switch (this.operator) {
-    case '+':
-    result = prev + curr;
-    break;
-    case '-':
-    result = prev - curr;
-    break;
-    case '*':
-    result = prev * curr;
-    break;
-    case '/':
-    result = prev / curr;
-    break;
-}
-    this.current = result.toString();
-    this.previous = null;
-    this.operator = null;
-}
-}
-}).mount('#app');
+        data() {
+            return {
+                current: '0',
+                previous: null,
+                operator: null,
+                operatorClicked: false
+            };
+        },
+        computed: {
+            display() {
+                return this.current;
+            }
+        },
+        methods: {
+            clear() {
+                this.current = '0';
+                this.previous = null;
+                this.operator = null;
+                this.operatorClicked = false;
+            },
+            append(number) {
+                if (this.operatorClicked) {
+                    this.current = '';
+                    this.operatorClicked = false;
+                }
+                this.current = this.current === '0' ? number : this.current + number;
+            },
+            setOperator(operator) {
+                if (this.previous !== null) {
+                    this.calculate();
+                }
+                this.previous = this.current;
+                this.operator = operator;
+                this.operatorClicked = true;
+            },
+            calculate() {
+                if (this.previous === null || this.operator === null) return;
+                let result;
+                const prev = parseFloat(this.previous);
+                const curr = parseFloat(this.current);
+                switch (this.operator) {
+                    case '+':
+                        result = prev + curr;
+                        break;
+                    case '-':
+                        result = prev - curr;
+                        break;
+                    case '*':
+                        result = prev * curr;
+                        break;
+                    case '/':
+                        result = prev / curr;
+                        break;
+                }
+                this.current = result.toString();
+                this.previous = null;
+                this.operator = null;
+            }
+        }
+    }).mount('#app');
 </script>
 </body>
 </html>
